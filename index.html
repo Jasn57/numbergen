@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2d2d2d; 
+            color: white; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #3c3c3c; 
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 300px;
+        }
+
+        h1 {
+            color: #e60000;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            width: 200px;
+            font-size: 16px;
+            background-color: #555555; 
+            color: white; 
+            border: 1px solid #ac0000; 
+            border-radius: 5px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #ff4d4d; 
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #ac0000; 
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #ff4d4d; 
+        }
+
+        p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #result {
+            color: #ff4d4d; 
+        }
+
+        #attempts {
+            color: #e60000; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Guess the Number Game</h1>
+        <p>Guess a number between 1 and 100:</p>
+        <input type="number" id="guess" placeholder="Enter your guess">
+        <button onclick="submitGuess()">Submit Guess</button>
+        <p id="result"></p>
+        <p id="attempts"></p>
+    </div>
+
+    <script>
+        let targetNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function submitGuess() {
+            const guess = parseInt(document.getElementById('guess').value);
+            const result = document.getElementById('result');
+            const attemptsDisplay = document.getElementById('attempts');
+            
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                alert("Please enter a valid number between 1 and 100.");
+                return;
+            }
+
+            attempts++;
+
+            if (guess < targetNumber) {
+                result.innerText = "Too low, try again.";
+            } else if (guess > targetNumber) {
+                result.innerText = "Too high, try again.";
+            } else {
+                result.innerText = "You guessed the number!";
+                attemptsDisplay.innerText = `You guessed it in ${attempts} attempts.`;
+               
+                setTimeout(() => {
+                    targetNumber = Math.floor(Math.random() * 100) + 1;
+                    attempts = 0;
+                    document.getElementById('guess').value = '';
+                    result.innerText = '';
+                    attemptsDisplay.innerText = '';
+                }, 3000); 
+            }
+
+            attemptsDisplay.innerText = `Attempts: ${attempts}`;
+        }
+    </script>
+</body>
+</html>
