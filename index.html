@@ -76,7 +76,7 @@
 <body>
     <div class="container">
         <h1>Guess the Number</h1>
-        <p>Guess a number between 1 and 100:</p>
+        <p>Guess a number between 1 and 10:</p>
         <input type="number" id="guess" placeholder="Enter your guess">
         <button onclick="submitGuess()">Submit Guess</button>
         <p id="result"></p>
@@ -84,7 +84,7 @@
     </div>
 
     <script>
-        let targetNumber = Math.floor(Math.random() * 100) + 1;
+        let targetNumber = Math.floor(Math.random() * 10) + 1;
         let attempts = 0;
 
         function submitGuess() {
@@ -92,8 +92,8 @@
             const result = document.getElementById('result');
             const attemptsDisplay = document.getElementById('attempts');
             
-            if (isNaN(guess) || guess < 1 || guess > 100) {
-                alert("Please enter a valid number between 1 and 100.");
+            if (isNaN(guess) || guess < 1 || guess > 10) {
+                alert("Please enter a valid number between 1 and 10.");
                 return;
             }
 
@@ -108,7 +108,7 @@
                 attemptsDisplay.innerText = `You guessed it in ${attempts} attempts.`;
                
                 setTimeout(() => {
-                    targetNumber = Math.floor(Math.random() * 100) + 1;
+                    targetNumber = Math.floor(Math.random() * 10) + 1;
                     attempts = 0;
                     document.getElementById('guess').value = '';
                     result.innerText = '';
