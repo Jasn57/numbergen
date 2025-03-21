@@ -12,23 +12,25 @@ function submitGuess() {
     }
 
     attempts++;
+    let message = ''; 
 
     if (guess < targetNumber) {
-        result.innerText = "Too low, try again.";
+        message = "Too low, try again.";
     } else if (guess > targetNumber) {
-        result.innerText = "Too high, try again.";
+        message = "Too high, try again.";
     } else {
-        result.innerText = "You guessed the number!";
-        attemptsDisplay.innerText = `You guessed it in ${attempts} attempts.`;
-       
-        setTimeout(() => {
-            targetNumber = Math.floor(Math.random() * 10) + 1;
-            attempts = 0;
-            document.getElementById('guess').value = '';
-            result.innerText = '';
-            attemptsDisplay.innerText = '';
-        }, 3000); 
+        message = `You guessed the number in ${attempts} attempts!`;
+        setTimeout(resetGame, 3000); 
     }
 
+    result.innerText = message;
     attemptsDisplay.innerText = `Attempts: ${attempts}`;
+}
+
+function resetGame() {
+    targetNumber = Math.floor(Math.random() * 10) + 1;
+    attempts = 0;
+    document.getElementById('guess').value = '';
+    document.getElementById('result').innerText = '';
+    document.getElementById('attempts').innerText = '';
 }
